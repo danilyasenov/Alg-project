@@ -5,8 +5,38 @@ class Program
 }
 class Translator
 {
+    private Hashtable _translations;
 
-}
+    public Translator()
+    {
+        _translations = new Hashtable();
+    }
+
+    public bool Add(string word, string translation)
+    {
+    }
+
+    public bool Remove(string words, string translation)
+    {
+
+    }
+
+    public bool Contains(string word)
+    {
+
+    }
+
+    public string translate(string remove)
+    {
+
+    }
+
+    public string PrintWords()
+    {
+
+    }
+
+    }
 public class Hashtable
 {
     private const int _InitCapacity = 10;
