@@ -37,6 +37,7 @@ class Translator
         {
             return "Net takogo slova / Нет такого слова!";
         }
+
     }
 
     public void ClearTranslations()
