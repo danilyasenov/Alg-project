@@ -44,6 +44,8 @@ public class Hashtable
 
         int bucketInd = GetIndex(key);
 
+        IncreaseCapacity();
+
         if (buckets[bucketInd] == null)
         {
             buckets[bucketInd] = new LinkedList<Item>();
@@ -55,7 +57,23 @@ public class Hashtable
 
     public bool Remove(string key)
     {
-
+        int Index = GetIndex(key);
+        if (buckets[Index]!= null)
+        {
+            var bucket = buckets[Index];
+            var node = bucket.First;
+            while(node != null)
+            {
+                if (node.Value.Key.Equals(key))
+                {
+                    bucket.Remove(node);
+                    _count--;
+                    return true;
+                }
+                node = node.Next;
+            }
+        }
+        return false;
     }
     public bool ContainKey(string key)
     {
@@ -77,12 +95,49 @@ public class Hashtable
 
     public string GetValue(string key)
     {
+        int Index = GetIndex(key);
 
+        if (buckets[Index] != null)
+        {
+            foreach (var item in buckets[Index])
+            {
+                if (item.Key.Equals(key))
+                {
+                    return item.Value;
+                }
+            }
+        }
+
+        throw new KeyNotFoundException($"The key '{key}' was not found in the hash table.");
     }
 
     private void IncreaseCapacity()
     {
+        if(_count >= _capacity)
+        {
+            _capacity *= 2;
+            LinkedList<Item>[] temp = new LinkedList<Item>[_capacity];
 
+            foreach(var bucket in buckets)
+            {
+                if (bucket != null)
+                {
+                    foreach (var item in bucket)
+                    {
+                        int newBucketIndex = GetIndex(item.Key);
+                        if (temp[newBucketIndex] == null)
+                        {
+                            temp[newBucketIndex] = new LinkedList<Item>();
+
+                        }
+                        temp[newBucketIndex].AddLast(item);
+                    }
+                }
+            }
+            buckets = temp;
+
+        }
+        return;
     }
 
 }
