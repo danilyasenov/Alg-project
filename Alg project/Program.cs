@@ -39,12 +39,29 @@ class Translator
         }
     }
 
-    public string PrintWords()
+    public void ClearTranslations()
     {
-
+        _translations = new Hashtable();
     }
 
+    public string TranslateSentence(string sentece)
+    {
+        string[] words = sentece.Split(' ');
+        string translated = "";
+        foreach( var word in words)
+        {
+            if (_translations.ContainKey(word))
+            {
+                translated += translate(word);
+            }
+            else
+            {
+                translated += "unknown words ";
+            }
+        }
+        return translated;
     }
+}
 public class Hashtable
 {
     private const int _InitCapacity = 10;
@@ -130,6 +147,7 @@ public class Hashtable
         return false;
 
     }
+    
 
     public string GetValue(string key)
     {
