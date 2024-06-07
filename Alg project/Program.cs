@@ -22,6 +22,39 @@ public class Hashtable
         buckets = new LinkedList<Item>[_capacity];
         _count = 0;
     }
+
+    private int GetIndex(string key)
+    { 
+    }
+
+    private int GetHashCode(string key) 
+    { 
+    }
+
+    public bool Add(string key,string value)
+    { 
+    }
+
+    public bool Remove(string key)
+    {
+
+    }
+
+    public bool ContainKey(string key)
+    {
+
+    }
+
+    public string GetValue(string key)
+    {
+
+    }
+
+    private void IncreaseCapacity()
+    {
+
+    }
+
 }
 
 public class Item
