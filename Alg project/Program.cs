@@ -14,21 +14,29 @@ class Translator
 
     public bool Add(string word, string translation)
     {
+        return _translations.Add(word, translation);
     }
 
-    public bool Remove(string words, string translation)
+    public bool Remove(string word)
     {
-
+        return _translations.Remove(word);
     }
 
     public bool Contains(string word)
     {
-
+        return _translations.ContainKey(word);
     }
 
-    public string translate(string remove)
+    public string translate(string word)
     {
-
+        try
+        {
+            return _translations.GetValue(word);
+        }
+        catch(KeyNotFoundException e)
+        {
+            return "Net takogo slova / Нет такого слова!";
+        }
     }
 
     public string PrintWords()
