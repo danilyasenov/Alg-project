@@ -39,16 +39,39 @@ public class Hashtable
     }
 
     public bool Add(string key,string value)
-    { 
+    {
+        if (ContainKey(key)) { return false; }
+
+        int bucketInd = GetIndex(key);
+
+        if (buckets[bucketInd] == null)
+        {
+            buckets[bucketInd] = new LinkedList<Item>();
+        }
+        buckets[bucketInd].AddLast(new Item(key, value));
+        _count++;
+        return true;
     }
 
     public bool Remove(string key)
     {
 
     }
-
     public bool ContainKey(string key)
     {
+        int bucketInd = GetIndex(key);
+
+        if (buckets[bucketInd] != null)
+        {
+            foreach(var Item in buckets[bucketInd])
+            {
+                if (Item.Key.Equals(key))
+                {
+                    return true;
+                }
+            }
+        }
+        return false;
 
     }
 
