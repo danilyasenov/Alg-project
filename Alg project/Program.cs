@@ -1,7 +1,35 @@
 ﻿using System;
 class Program
 {
+    static void Main(string[] args)
+    {
+        Translator translator = new Translator();
 
+        // Добавляем несколько слов и их переводов
+        translator.Add("hello", "привет");
+        translator.Add("world", "мир");
+        translator.Add("cat", "кот");
+
+        // Проверяем методы класса Translator
+        Console.WriteLine("Перевод слов:");
+        Console.WriteLine(translator.translate("hello")); // Выведет "привет"
+        Console.WriteLine(translator.translate("dog")); // Выведет "Net takogo slova / Нет такого слова!"
+
+        // Проверяем метод TranslateSentence
+        string sentence = "hello world I love cats";
+        Console.WriteLine("Перевод предложения:");
+        Console.WriteLine(translator.TranslateSentence(sentence)); // Выведет "привет мир! I love unknown words"
+
+        // Удаляем слово "hello" и проверяем его отсутствие в словаре
+        translator.Remove("hello");
+        Console.WriteLine("Проверка отсутствия слова:");
+        Console.WriteLine(translator.Contains("hello")); // Выведет "False"
+
+        // Очищаем словарь и проверяем, что он пуст
+        translator.ClearTranslations();
+        Console.WriteLine("Очищен ли словарь:");
+        Console.WriteLine(translator.Contains("world")); // Выведет "False"
+    }
 }
 class Translator
 {
@@ -53,9 +81,10 @@ class Translator
         {
             if (_translations.ContainKey(word))
             {
-                translated += translate(word);
+                translated += translate(word)+ " ";
             }
             else
+
             {
                 translated += "unknown words ";
             }
