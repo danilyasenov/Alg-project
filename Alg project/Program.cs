@@ -24,11 +24,18 @@ public class Hashtable
     }
 
     private int GetIndex(string key)
-    { 
+    {
+        return GetHashCode(key) % _capacity;
     }
 
     private int GetHashCode(string key) 
-    { 
+    {
+        int hashcode = 0;
+        foreach(char c in key)
+        {
+            hashcode += c;
+        }
+        return hashcode;
     }
 
     public bool Add(string key,string value)
